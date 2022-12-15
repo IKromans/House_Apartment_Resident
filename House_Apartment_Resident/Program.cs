@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using HouseApartmentResidentApi.Model;
-using HouseApartmentResidentApi.Data;
+using House_Apartment_Resident.Model;
+using House_Apartment_Resident.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

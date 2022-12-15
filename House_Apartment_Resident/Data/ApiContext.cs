@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using HouseApartmentResidentApi.Model;
+using House_Apartment_Resident.Model;
 
-namespace HouseApartmentResidentApi.Data
+namespace House_Apartment_Resident.Data
 {
     public class ApiContext : DbContext
     {

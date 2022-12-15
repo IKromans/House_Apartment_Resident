@@ -1,79 +1,45 @@
-﻿using HouseApartmentResidentApi.Data;
-using HouseApartmentResidentApi.Model;
+﻿using House_Apartment_Resident.Service;
+using House_Apartment_Resident.Data;
+using House_Apartment_Resident.Model;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HouseApartmentResidentApi.Controllers
+namespace House_Apartment_Resident.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class HouseController : ControllerBase
+    public class HouseController
     {
-        private readonly ApiContext context;
+
+        private readonly HouseService service;
 
         public HouseController(ApiContext context)
         {
-            this.context = context;
+            this.service = new HouseService(context);
         }
 
         [HttpPost]
         public JsonResult CreateEdit(House house)
         {
-            if (house.Id == 0)
-            {
-                context.Houses.Add(house);
-            }
-            else
-            {
-                var houseInDb = context.Houses.Find(house.Id);
-
-                if (houseInDb == null)
-                    return new JsonResult(NotFound());
-
-                houseInDb.Number = house.Number;
-                houseInDb.Street = house.Street;
-                houseInDb.City = house.City;
-                houseInDb.Country = house.Country;
-                houseInDb.PostalCode = house.PostalCode;
-            }
-
-            context.SaveChanges();
-
-            return new JsonResult(Ok(house));
+            return service.CreateEdit(house);
         }
 
 
         [HttpGet]
         public JsonResult Get(int id)
         {
-            var house = context.Houses.Find(id);
-
-            if (house == null)
-                return new JsonResult(NotFound());
-
-            return new JsonResult(Ok(house));
+            return service.Get(id);
         }
 
         [HttpDelete]
         public JsonResult Delete(int id)
         {
-            var house = context.Houses.Find(id);
-
-            if (house == null)
-                return new JsonResult(NotFound());
-
-            context.Houses.Remove(house);
-            context.SaveChanges();
-
-            return new JsonResult(NoContent());
+            return service.Delete(id);
         }
 
         [HttpGet()]
         public JsonResult GetAll()
         {
-            var house
-                = context.Houses.ToList();
-
-            return new JsonResult(Ok(house));
+            return service.GetAll();
         }
     }
 }

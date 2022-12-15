@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace HouseApartmentResidentApi.Model
+namespace House_Apartment_Resident.Model
 {
     public class Apartment
     {
